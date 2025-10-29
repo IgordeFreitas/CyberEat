@@ -1,3 +1,1 @@
-pass
-
-...
+print('Hello World')
