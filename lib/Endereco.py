@@ -55,6 +55,15 @@ class Endereco():
     
 ###############################################################
 
+    def setPontoReferencia(self, novoPontoReferencia):
+        self.p_referencia = novoPontoReferencia
+        return self.p_referencia
+    
+    def getPontoReferencia(self):
+        return self.p_referencia
+    
+###############################################################
+
     def setCidade(self, novaCidade):
         self.cidade = novaCidade
         return self.cidade
