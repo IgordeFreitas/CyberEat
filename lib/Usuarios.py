@@ -6,6 +6,8 @@ class Usuarios():
         self.senha = senha
         self.telefone = telefone
 
+######################################################
+
     def setNome(self, novo_nome):
         self.nome = novo_nome
         return self.nome
