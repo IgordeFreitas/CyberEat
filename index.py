@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Body
+from controller.testeController import consultarUsuarios
 
 app = FastAPI()
 
@@ -13,7 +14,5 @@ def cadastrarProduto(nome: str = Body(embed = True), preco: float = Body(embed =
 
 @app.get("/")
 
-def returnal():
-    return{
-        'Mensagem': 'Hello World'
-    }
+def inicio():
+    return consultarUsuarios()
