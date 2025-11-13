@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 try:
-    connectionPool = mysql.connector.pooling.MySQLConnectionPool(
+    connectionPool = mysql.connector.pooling.MySQLConnectionPool (
         pool_name = 'pool',
         pool_size = 5,
         pool_reset_session = True,
