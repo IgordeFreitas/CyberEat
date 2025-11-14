@@ -16,3 +16,14 @@ def cadastrarProduto(nome: str = Body(embed = True), preco: float = Body(embed =
 
 def inicio():
     return consultarUsuarios()
+
+@app.post("/clientes")
+    
+def cadastrarClientes(nome: str = Body(embed = True), email: str = Body(embed = True), senha: str = Body(embed = True), telefone: str = Body(embed = True)):
+    return {
+        'ação': 'Cadastrar Cliente',
+        'nome': nome,
+        'emial': email,
+        'senha': senha,
+        'telefone': telefone
+    }
