@@ -1,16 +1,10 @@
-from ..controller.testeController import TesteController
-
-tc = TesteController()
-
-sql = "SELECT * FROM usuarios"
-
 def queryUsuarios(connectionDB):
     try:
-        query = connectionDB.cursor(dictionary = True)
-        query.execute(sql)
-
-        usuarios =  query.fetchAll()
-        query.close
+        cursor = connectionDB.cursor(dictionary = True)
+        cursor.execute('SELECT nome, email, senha, telefone FROM usuarios')
+        usuarios = cursor.fetchall()
+        cursor.close()
+        return usuarios
 
     except:
-        ...
+        print('Deu ruim')
