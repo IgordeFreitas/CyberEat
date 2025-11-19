@@ -8,40 +8,40 @@ class Pedidos:
 
 ###############################################################
 
-    def get_idRestaurantes(self):
+    def getIdRestaurantes(self):
         return self._idRestaurantes
 
-    def set_idRestaurantes(self, noovIdRestaurante):
-        self._idRestaurantes = noovIdRestaurante
+    def setIdRestaurantes(self, novoIdRestaurante):
+        self._idRestaurantes = novoIdRestaurante
 
 ###############################################################
 
-    def get_idUsuarios(self):
+    def getIdUsuarios(self):
         return self._idUsuarios
 
-    def set_idUsuarios(self, novoIdUsuario):
+    def setIdUsuarios(self, novoIdUsuario):
         self._idUsuarios = novoIdUsuario
 
 ###############################################################
 
-    def get_idEndereco(self):
+    def getIdEndereco(self):
         return self._idEndereco
 
-    def set_idEndereco(self, novoIdEndereco):
+    def setIdEndereco(self, novoIdEndereco):
         self._idEndereco = novoIdEndereco
 
 ###############################################################
 
-    def get_idPagamento(self):
+    def getIidPagamento(self):
         return self._idPagamento
 
-    def set_idPagamento(self, novoIdPagamento):
+    def setIdPagamento(self, novoIdPagamento):
         self._idPagamento = novoIdPagamento
 
 ###############################################################
 
-    def get_idEntrega(self):
+    def getIdEntrega(self):
         return self._idEntrega
 
-    def set_idEntrega(self, novoIdEntrega):
+    def setIdEntrega(self, novoIdEntrega):
         self._idEntrega = novoIdEntrega

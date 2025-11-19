@@ -7,32 +7,32 @@ class ItensPedido:
 
 ###############################################################
 
-    def get_idPedido(self):
+    def getIdPedido(self):
         return self.idPedido
 
-    def set_novoIdPedido(self, novoIdPedido):
+    def setNovoIdPedido(self, novoIdPedido):
         self.idPedido = novoIdPedido
 
 ###############################################################
 
-    def get_nomeItem(self):
+    def getNomeItem(self):
         return self.nomeItem
 
-    def set_novoNomeItem(self, novoNomeItem):
+    def setNovoNomeItem(self, novoNomeItem):
         self.nomeItem = novoNomeItem
 
 ###############################################################
 
-    def get_quantidadeItem(self):
+    def getQuantidadeItem(self):
         return self.uantidadeItem
 
-    def set_novoQuantidadeItem(self, novoQuantidadeItem):
+    def setNovoQuantidadeItem(self, novoQuantidadeItem):
         self.uantidadeItem = novoQuantidadeItem
 
 ###############################################################
 
-    def get_precoUnitario(self):
+    def getPrecoUnitario(self):
         return self._precoUnitario
 
-    def set_novoPrecoUnitario(self, novoPrecoUnitario):
+    def setNovoPrecoUnitario(self, novoPrecoUnitario):
         self._precoUnitario = novoPrecoUnitario

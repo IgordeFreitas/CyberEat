@@ -5,16 +5,16 @@ class Entregas:
 
 ###############################################################
    
-    def get_idIndereco(self):
+    def getIdIndereco(self):
         return self.idIndereco
 
-    def set_idIndereco(self, novoIdIndereco):
+    def setIdIndereco(self, novoIdIndereco):
         self.idIndereco = novoIdIndereco
 
 ###############################################################
 
-    def get_dataEntrega(self):
+    def getDataEntrega(self):
         return self.dataEntrega
 
-    def set_dataEntrega(self, novaDataEntrega):
+    def setDataEntrega(self, novaDataEntrega):
         self.dataEntrega = novaDataEntrega

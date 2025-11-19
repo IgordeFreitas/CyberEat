@@ -6,24 +6,24 @@ class Pagamentos:
 
 ###############################################################
 
-    def get_tipoPagamento(self):
+    def getTipoPagamento(self):
         return self.tipoPagamento
 
-    def set_novoTipoPagamento(self, novoTipoPagamento):
+    def setNovoTipoPagamento(self, novoTipoPagamento):
         self.tipoPagamento = novoTipoPagamento
 
 ###############################################################
 
-    def get_statusPagamento(self):
+    def getStatusPagamento(self):
         return self.statusPagamento
 
-    def set_novoStatusPagamento(self, novoStatusPagamento):
+    def setNovoStatusPagamento(self, novoStatusPagamento):
         self.statusPagamento = novoStatusPagamento
 
 ###############################################################
 
-    def get_valorTotal(self):
+    def getValorTotal(self):
         return self.valorTotal
 
-    def set_novoValorTotal(self, novoValorTotal):
+    def setNovoValorTotal(self, novoValorTotal):
         self.valorTotal = novoValorTotal

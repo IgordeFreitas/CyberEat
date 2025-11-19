@@ -6,24 +6,24 @@ class Avaliacoes:
 
 ###############################################################
 
-    def get_idPedido(self):
+    def getIdPedido(self):
         return self.idPedido
 
-    def set_novoIdPedido(self, novoIdPedido):
+    def setNovoIdPedido(self, novoIdPedido):
         self.idPedido = novoIdPedido
 
 ###############################################################
 
-    def get_notaServico(self):
+    def getNotaServico(self):
         return self.notaServico
 
-    def set_novoNotaServico(self, novoNotaServico):
+    def setNovoNotaServico(self, novoNotaServico):
         self.notaServico = novoNotaServico
 
 ###############################################################
 
-    def get_comentarioServico(self):
+    def getComentarioServico(self):
         return self.comentarioServico
 
-    def set_novoComentarioServico(self, novoComentarioServico):
+    def setNovoComentarioServico(self, novoComentarioServico):
         self.comentarioServico = novoComentarioServico
