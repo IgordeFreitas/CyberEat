@@ -27,14 +27,14 @@ CREATE TABLE pagamentos (
 INSERT INTO pagamentos (tipo_pagamento, status_pagamento, valor_total) VALUES ('dinheiro','pago', 8);
 
 CREATE TABLE restaurantes (
-    id_produto INT NOT NULL,
     id_restaurantes INT AUTO_INCREMENT PRIMARY KEY,
+    id_produto INT NOT NULL,
     id_usuarios INT NOT NULL,
     id_endereco INT NOT NULL,
     nome_restaurante VARCHAR(150) NOT NULL,
     categoria VARCHAR(100),
     FOREIGN KEY (id_usuarios) REFERENCES usuarios(id_usuarios),
-    FOREIGN KEY (id_endereco) REFERENCES endereco(id_endereco)
+    FOREIGN KEY (id_endereco) REFERENCES endereco(id_endereco),
     FOREIGN KEY (id_produto) REFERENCES produtos(id_produto)
 );
 

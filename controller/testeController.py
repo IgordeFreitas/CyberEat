@@ -1,5 +1,5 @@
 from config.dbConfig import getConnection
-from model.testeModel import queryUsuarios
+from model.testeModel import queryUsuarios, queryRestaurantes
 def consultarUsuarios():
     connection = None
     try:
@@ -9,3 +9,11 @@ def consultarUsuarios():
     finally:
         if connection:
             connection.close()
+
+def consultarRestaurantes():
+    conect = None
+    try:
+        conect = getConnection()
+        return queryRestaurantes(conect)
+    except:
+        print('Erro')
