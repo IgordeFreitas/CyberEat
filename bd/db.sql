@@ -48,6 +48,7 @@ CREATE TABLE produtos (
 );
 
 
+
 CREATE TABLE entregas (
     id_entrega INT AUTO_INCREMENT PRIMARY KEY,
     id_endereco INT NOT NULL,
