@@ -8,8 +8,8 @@ class Usuarios():
 
 ######################################################
 
-    def setNome(self, novo_nome):
-        self.nome = novo_nome
+    def setNome(self, novoNome):
+        self.nome = novoNome
         return self.nome
 
     def getNOme(self):
@@ -17,8 +17,8 @@ class Usuarios():
     
 ####################################################### 
     
-    def setCPF(self, novo_CPF):
-        self.cpf = novo_CPF
+    def setCPF(self, novoCPF):
+        self.cpf = novoCPF
         return self.cpf
         
     def getCPF(self):
@@ -26,8 +26,8 @@ class Usuarios():
     
 #######################################################
 
-    def setEmail(self, novo_emial):
-        self.email = novo_emial
+    def setEmail(self, novoEmial):
+        self.email = novoEmial
         return self.email
 
     def getEmail(self):
@@ -35,8 +35,8 @@ class Usuarios():
     
 #######################################################    
 
-    def setSenha(self, nova_senha):
-        self.senha = nova_senha
+    def setSenha(self, novaSenha):
+        self.senha = novaSenha
         return self.senha
         
     def getSenha(self):
@@ -44,8 +44,8 @@ class Usuarios():
     
 #######################################################
 
-    def setTelefone(self, novo_telefone):
-        self.telefone = novo_telefone
+    def setTelefone(self, novoTelefone):
+        self.telefone = novoTelefone
         return self.telefone
 
     def getTelefone(self):

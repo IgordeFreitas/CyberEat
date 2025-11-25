@@ -3,7 +3,7 @@ class ItensPedido:
         self.idPedido = idPedido
         self.nomeItem = nomeItem
         self.uantidadeItem = quantidadeItem
-        self._precoUnitario = precoUnitario
+        self.precoUnitario = precoUnitario
 
 ###############################################################
 
@@ -32,7 +32,7 @@ class ItensPedido:
 ###############################################################
 
     def getPrecoUnitario(self):
-        return self._precoUnitario
+        return self.precoUnitario
 
     def setNovoPrecoUnitario(self, novoPrecoUnitario):
-        self._precoUnitario = novoPrecoUnitario
+        self.precoUnitario = novoPrecoUnitario
