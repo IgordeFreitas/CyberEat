@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Body
-from controller.testeController import *
+from controller.controllerUsuarios import *
 
 app = FastAPI()
 
