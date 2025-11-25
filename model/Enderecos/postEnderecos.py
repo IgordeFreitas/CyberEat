@@ -1,6 +1,6 @@
-def insertEnderecos(conectionDB, nome, email, senha, telefone):
+def insertEnderecos(conectionDB, , bairro):
     cursor = conectionDB.cursor(dictionary = True)
-    cursor.execute('INSERT INTO usuarios (nome, email, senha, telefone) VALUES(%s, %s, %s, %s)', (nome, email, senha, telefone))
+    cursor.execute('INSERT INTO Enderecos ( , bairo) VALUES(%s, %s, %s, %s)', ( ,bairro ))
     cursor.fetchall()
     cursor.close()
     return cursor.rowcount
