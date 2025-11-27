@@ -1,38 +1,37 @@
 import mysql.connector
 from config.dbConfig import getConnection
-from model.Usuarios.getUsuarios import queryUsuarios
-from model.Usuarios.postUsuarios import insertUsuarios
-from model.Usuarios.deleteUsuario import deleteUsuarios
-from lib.Usuarios import Usuarios
-
-############################################################################
+from model.Avaliacoes.getAvaliacoes import queryAvaliacoes
+from model.Avaliacoes.postAvaliacoes import insertAvaliacoes
+from model.Avaliacoes.deleteAvaliacoes import deleteAvaliacoes
+from lib.Avaliacoes import Avaliacoes
 
 
-def consultarUsuarios():
+
+
+def consultarAvaliacoes():
     connection = None
     try:
         connection = getConnection()
-        query = queryUsuarios(connection)
-        usuario = []        
+        query = queryAvaliacoes(connection)
+        avaliacoes = []        
         for row in query:
-            user = Usuarios(row['nome'], row['email'], row['senha'], row['telefone'])
-            usuario.append(user)
-        return usuario
+            user = Avaliacoes(row['id_Avaliacoes'],row['notaServico'], row['comentarioServico'])
+            avaliacoes.append(user)
+        return avaliacoes
     finally:
         if connection:
             connection.close()
 
-############################################################################
 
-def inserirUsuario(nome, email, senha, telefone):
+def inserirAvaliacoes(id_Avaliacoes, notaServico, comentarioServico):
     connect = None 
     connect = getConnection()
     try:
         connect.start_transaction()
-        linhasAfetadas = insertUsuarios(connect, nome, email, senha, telefone)
+        linhasAfetadas = insertAvaliacoes(connect, id_Avaliacoes, notaServico, comentarioServico)
         connect.commit()
         if linhasAfetadas == 1:
-            return "Usuario cadastrado com sucesso"
+            return "Avaliacoes cadastrado com sucesso"
     except mysql.connector.Error as error:
         print('Erro')
         connect.rollback()
@@ -43,15 +42,15 @@ def inserirUsuario(nome, email, senha, telefone):
 
 ############################################################################
 
-def deletarUsuario(idUsuarios):
+def deletarAvaliacoes(id_Avaliacoes):
     connect = None 
     connect = getConnection()
     try:
         connect.start_transaction()
-        linhasAfetadas = deleteUsuarios(connect, idUsuarios)
+        linhasAfetadas = deleteAvaliacoes(connect, id_Avaliacoes)
         connect.commit()
         if linhasAfetadas == 1:
-            return "Usuario excluido com sucesso"
+            return "Avaliacoes excluido com sucesso"
     except mysql.connector.Error as error:
         print('Erro')
         connect.rollback()

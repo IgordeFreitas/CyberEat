@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Body
-from controller.controllerUsuarios import *
+import controller
 
 app = FastAPI()
 
@@ -8,7 +8,7 @@ app = FastAPI()
 @app.get("/clientes")
 
 def inicio():
-    return consultarUsuarios()
+    return controller.controllerUsuarios.consultarUsuarios()
 
 @app.post("/clientes")
 
@@ -19,13 +19,13 @@ def cadastrarUsuario(
     telefone: str = Body(embed = True)
 ):
     
-    return inserirUsuario(nome, email, senha, telefone)
+    return controller.controllerUsuarios.inserirUsuario(nome, email, senha, telefone)
 
 
 @app.delete("/clientes")
 
 def apagarUsuarios(idUsuario: int = Body(embed = True)):
-    return deletarUsuario(idUsuario)
+    return controller.controllerUsuarios.deletarUsuario(idUsuario)
 #################################################################  Abaixo, tudo sobre a rota /restaurantes
 
 @app.get("/restaurante")
@@ -39,7 +39,4 @@ def restaurantes():
 @app.post("/produtos")
 
 def cadastrarProduto(nome: str = Body(embed = True), preco: float = Body(embed = True)):
-    return {
-        'nome': nome,
-        'preco': preco
-    }
+   ...

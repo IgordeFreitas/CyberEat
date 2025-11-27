@@ -1,38 +1,37 @@
 import mysql.connector
 from config.dbConfig import getConnection
-from model.Usuarios.getUsuarios import queryUsuarios
-from model.Usuarios.postUsuarios import insertUsuarios
-from model.Usuarios.deleteUsuario import deleteUsuarios
-from lib.Usuarios import Usuarios
-
-############################################################################
+from model.Enderecos.getEndereco import queryEndereco
+from model.Enderecos.postEnderecos import insertEnderecos
+from model.Enderecos.deleteEnderecos import deleteEnderecos
+from lib.Endereco import Endereco
 
 
-def consultarUsuarios():
+
+
+def consultarEndereco():
     connection = None
     try:
         connection = getConnection()
-        query = queryUsuarios(connection)
-        usuario = []        
+        query = queryEndereco(connection)
+        endereco = []        
         for row in query:
-            user = Usuarios(row['nome'], row['email'], row['senha'], row['telefone'])
-            usuario.append(user)
-        return usuario
+            user = Endereco(row['id_usuario'], row['bairro'])
+            endereco.append(user)
+        return endereco
     finally:
         if connection:
             connection.close()
 
-############################################################################
 
-def inserirUsuario(nome, email, senha, telefone):
+def inserirEndereco(id_usuario, bairro):
     connect = None 
     connect = getConnection()
     try:
         connect.start_transaction()
-        linhasAfetadas = insertUsuarios(connect, nome, email, senha, telefone)
+        linhasAfetadas = insertEnderecos(connect, id_usuario, bairro)
         connect.commit()
         if linhasAfetadas == 1:
-            return "Usuario cadastrado com sucesso"
+            return "Endereco cadastrado com sucesso"
     except mysql.connector.Error as error:
         print('Erro')
         connect.rollback()
@@ -43,15 +42,15 @@ def inserirUsuario(nome, email, senha, telefone):
 
 ############################################################################
 
-def deletarUsuario(idUsuarios):
+def deletarEndereco(id_Enderecos):
     connect = None 
     connect = getConnection()
     try:
         connect.start_transaction()
-        linhasAfetadas = deleteUsuarios(connect, idUsuarios)
+        linhasAfetadas = deleteEnderecos(connect, id_Enderecos)
         connect.commit()
         if linhasAfetadas == 1:
-            return "Usuario excluido com sucesso"
+            return "Endereco excluido com sucesso"
     except mysql.connector.Error as error:
         print('Erro')
         connect.rollback()

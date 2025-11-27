@@ -1,38 +1,38 @@
 import mysql.connector
 from config.dbConfig import getConnection
-from model.Usuarios.getUsuarios import queryUsuarios
-from model.Usuarios.postUsuarios import insertUsuarios
-from model.Usuarios.deleteUsuario import deleteUsuarios
-from lib.Usuarios import Usuarios
+from model.ItensPedido.getItensPedido import queryItensPedido
+from model.ItensPedido.postItensPedido import insertItensPedido
+from model.ItensPedido.deleteItensPedido import deleteItensPedido
+from lib.ItensPedido import ItensPedido
 
 ############################################################################
 
 
-def consultarUsuarios():
+def consultarItensPedido():
     connection = None
     try:
         connection = getConnection()
-        query = queryUsuarios(connection)
-        usuario = []        
+        query = queryItensPedido(connection)
+        itensPedido = []        
         for row in query:
-            user = Usuarios(row['nome'], row['email'], row['senha'], row['telefone'])
-            usuario.append(user)
-        return usuario
+            user = ItensPedido(row['id_Pedido'], row['nomeItem'], row['quantidadeItem'], row['precoUnitario'])
+            itensPedido.append(user)
+        return itensPedido
     finally:
         if connection:
             connection.close()
 
 ############################################################################
 
-def inserirUsuario(nome, email, senha, telefone):
+def inserirItensPedido(id_Pedido, nomeItem, quantidadeItem, precoUnitario):
     connect = None 
     connect = getConnection()
     try:
         connect.start_transaction()
-        linhasAfetadas = insertUsuarios(connect, nome, email, senha, telefone)
+        linhasAfetadas = insertItensPedido(id_Pedido, nomeItem, quantidadeItem, precoUnitario)
         connect.commit()
         if linhasAfetadas == 1:
-            return "Usuario cadastrado com sucesso"
+            return "ItensPedido cadastrado com sucesso"
     except mysql.connector.Error as error:
         print('Erro')
         connect.rollback()
@@ -43,15 +43,15 @@ def inserirUsuario(nome, email, senha, telefone):
 
 ############################################################################
 
-def deletarUsuario(idUsuarios):
+def deletarItensPedido(id_ItensPedido):
     connect = None 
     connect = getConnection()
     try:
         connect.start_transaction()
-        linhasAfetadas = deleteUsuarios(connect, idUsuarios)
+        linhasAfetadas = deleteItensPedido(connect, id_ItensPedido)
         connect.commit()
         if linhasAfetadas == 1:
-            return "Usuario excluido com sucesso"
+            return "ItensPedido excluido com sucesso"
     except mysql.connector.Error as error:
         print('Erro')
         connect.rollback()

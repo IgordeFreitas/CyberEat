@@ -1,38 +1,38 @@
 import mysql.connector
 from config.dbConfig import getConnection
-from model.Usuarios.getUsuarios import queryUsuarios
-from model.Usuarios.postUsuarios import insertUsuarios
-from model.Usuarios.deleteUsuario import deleteUsuarios
-from lib.Usuarios import Usuarios
+from model.Pagamentos.getPagamentos import queryPagamentos
+from model.Pagamentos.postPagamentos import insertPagamentos
+from model.Pagamentos.deletePagamentos import deletePagamentos
+from lib.Pagamentos import Pagamentos
 
 ############################################################################
 
 
-def consultarUsuarios():
+def consultarPagamentos():
     connection = None
     try:
         connection = getConnection()
-        query = queryUsuarios(connection)
-        usuario = []        
+        query = queryPagamentos(connection)
+        pagamento = []        
         for row in query:
-            user = Usuarios(row['nome'], row['email'], row['senha'], row['telefone'])
-            usuario.append(user)
-        return usuario
+            user = Pagamentos(row['tipoPagamento'], row['statusPagamento'], row['valorTotal'])
+            pagamento.append(user)
+        return pagamento
     finally:
         if connection:
             connection.close()
 
 ############################################################################
 
-def inserirUsuario(nome, email, senha, telefone):
+def inserirPagamentos(tipoPagamento, statusPagamento, valorTotal):
     connect = None 
     connect = getConnection()
     try:
         connect.start_transaction()
-        linhasAfetadas = insertUsuarios(connect, nome, email, senha, telefone)
+        linhasAfetadas = insertPagamentos(connect, tipoPagamento, statusPagamento, valorTotal)
         connect.commit()
         if linhasAfetadas == 1:
-            return "Usuario cadastrado com sucesso"
+            return "Pagamento cadastrado com sucesso"
     except mysql.connector.Error as error:
         print('Erro')
         connect.rollback()
@@ -43,15 +43,15 @@ def inserirUsuario(nome, email, senha, telefone):
 
 ############################################################################
 
-def deletarUsuario(idUsuarios):
+def deletarPagamento(id_Pagamentos):
     connect = None 
     connect = getConnection()
     try:
         connect.start_transaction()
-        linhasAfetadas = deleteUsuarios(connect, idUsuarios)
+        linhasAfetadas = deletePagamentos(connect, id_Pagamentos)
         connect.commit()
         if linhasAfetadas == 1:
-            return "Usuario excluido com sucesso"
+            return "Pagamento excluido com sucesso"
     except mysql.connector.Error as error:
         print('Erro')
         connect.rollback()
