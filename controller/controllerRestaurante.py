@@ -15,7 +15,7 @@ def consultarRestaurantes():
         query = queryRestaurantes(connection)
         restaurante = []        
         for row in query:
-            user = Restaurante(row['id_Produto'], row['id_Usuarios'], row['id_Endenreco'], row['nome'], row['categoria'])
+            user = Restaurante(row['id_usuarios'], row['id_endereco'], row['nome_restaurante'], row['categoria'])
             restaurante.append(user)
         return restaurante
     finally:
@@ -24,12 +24,13 @@ def consultarRestaurantes():
 
 ############################################################################
 
-def inserirRestaurantes(id_Produto, id_Usuarios, id_Endenreco, nome, categoria):
+def inserirRestaurantes(id_Usuarios, id_Endenreco, nome_restaurante, categoria):
     connect = None 
     connect = getConnection()
     try:
+        restaurante = Restaurante(id_Usuarios, id_Endenreco, nome_restaurante, categoria)
         connect.start_transaction()
-        linhasAfetadas = insertRestaurantes(connect, id_Produto, id_Usuarios, id_Endenreco, nome, categoria)
+        linhasAfetadas = insertRestaurantes(connect, restaurante)
         connect.commit()
         if linhasAfetadas == 1:
             return "Restaurante cadastrado com sucesso"
@@ -53,7 +54,7 @@ def deletarRestaurante(id_Restaurantes):
         if linhasAfetadas == 1:
             return "Restaurante excluido com sucesso"
     except mysql.connector.Error as error:
-        print('Erro')
+        print(error)
         connect.rollback()
 
     finally:

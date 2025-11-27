@@ -32,7 +32,7 @@ class Pedidos:
 
 ###############################################################
 
-    def getIidPagamento(self):
+    def getIdPagamento(self):
         return self.idPagamento
 
     def setIdPagamento(self, novoIdPagamento):

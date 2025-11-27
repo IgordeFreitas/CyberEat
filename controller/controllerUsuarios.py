@@ -28,8 +28,9 @@ def inserirUsuario(nome, email, senha, telefone):
     connect = None 
     connect = getConnection()
     try:
+        user = Usuarios(nome, email, senha, telefone)
         connect.start_transaction()
-        linhasAfetadas = insertUsuarios(connect, nome, email, senha, telefone)
+        linhasAfetadas = insertUsuarios(connect, user)
         connect.commit()
         if linhasAfetadas == 1:
             return "Usuario cadastrado com sucesso"
@@ -52,6 +53,7 @@ def deletarUsuario(idUsuarios):
         connect.commit()
         if linhasAfetadas == 1:
             return "Usuario excluido com sucesso"
+
     except mysql.connector.Error as error:
         print('Erro')
         connect.rollback()

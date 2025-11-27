@@ -15,7 +15,7 @@ def consultarPedidos():
         query = queryPedidos(connection)
         pedido = []        
         for row in query:
-            user = Pedidos(row['id_Restaurantes'], row['id_Usuarios'], row['id_Endereco'], row['id_Pagamento'], row['id_Entrega'])
+            user = Pedidos(row['id_restaurantes'], row['id_usuarios'], row['id_endereco'], row['id_pagamento'], row['id_entrega'])
             pedido.append(user)
         return pedido
     finally:
@@ -28,8 +28,9 @@ def inserirPedidos(id_Restaurantes, id_Usuarios, id_Endereco, id_Pagamento, id_E
     connect = None 
     connect = getConnection()
     try:
+        pedido = Pedidos(id_Restaurantes, id_Usuarios, id_Endereco, id_Pagamento, id_Entrega)
         connect.start_transaction()
-        linhasAfetadas = insertPedidos(connect,id_Restaurantes, id_Usuarios, id_Endereco, id_Pagamento, id_Entrega)
+        linhasAfetadas = insertPedidos(connect, pedido)
         connect.commit()
         if linhasAfetadas == 1:
             return "Pedido cadastrado com sucesso"

@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Body
-import controller
+from controller import controllerUsuarios, controllerRestaurante, controllerAvaliacoes, controllerEndereco, controllerEntregas, controllerItensPedidos, controllerPagamentos, controllerPedidos
 
 app = FastAPI()
 
@@ -7,8 +7,8 @@ app = FastAPI()
 
 @app.get("/clientes")
 
-def inicio():
-    return controller.controllerUsuarios.consultarUsuarios()
+def consultUsuarios():
+    return controllerUsuarios.consultarUsuarios()
 
 @app.post("/clientes")
 
@@ -18,25 +18,53 @@ def cadastrarUsuario(
     senha: str = Body(embed = True),
     telefone: str = Body(embed = True)
 ):
-    
-    return controller.controllerUsuarios.inserirUsuario(nome, email, senha, telefone)
-
+   
+    return controllerUsuarios.inserirUsuario(nome, email, senha, telefone)
 
 @app.delete("/clientes")
 
 def apagarUsuarios(idUsuario: int = Body(embed = True)):
-    return controller.controllerUsuarios.deletarUsuario(idUsuario)
+    return controllerUsuarios.deletarUsuario(idUsuario)
+
+
 #################################################################  Abaixo, tudo sobre a rota /restaurantes
 
-@app.get("/restaurante")
+@app.get("/restaurantes")
 
 def restaurantes():
-    return 
+    return controllerRestaurante.consultarRestaurantes()
 
-#################################################################  Abaixo, tudo sobre a rota /produtos
+@app.post("/restaurantes")
+
+def cadastrarRestaurante(
+    id_usuario: int = Body(embed = True),
+    id_endereco: int = Body(embed = True),
+    nome_restaurante: str = Body(embed = True),
+    categoria: str = Body(embed = True),
+):
+    return controllerRestaurante.inserirRestaurantes(id_usuario, id_endereco, nome_restaurante, categoria)
+
+@app.delete("/restaurantes")
+
+def deletarRestaurantes(id_restaurantes: int = Body(embed = True)):
+    return controllerRestaurante.deletarRestaurante(id_restaurantes)
+    
+#################################################################  Abaixo, tudo sobre a rota /pedidos
 
 
-@app.post("/produtos")
+@app.get("/pedidos")
 
-def cadastrarProduto(nome: str = Body(embed = True), preco: float = Body(embed = True)):
-   ...
+def consultPedidos():
+    return controllerPedidos.consultarPedidos()
+
+
+@app.post("/pedidos")
+
+def cadastrarPedidos(
+    id_restaurantes: int = Body(embed = True),
+    id_usuarios: int = Body(embed = True),
+    id_Endereco: int = Body(embed = True),
+    id_Pagamento: int = Body(embed = True),
+    id_Entrega: int = Body(embed = True),
+):
+    return controllerPedidos.inserirPedidos(id_restaurantes, id_usuarios, id_Endereco, id_Pagamento, id_Entrega)

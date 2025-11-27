@@ -1,19 +1,9 @@
 class Restaurante():
-    def __init__(self, idProduto, idUsuarios, idEndenreco, nome, categoria):
-        self.idProduto = idProduto
+    def __init__(self, idUsuarios, idEndenreco, nome, categoria):
         self.idUsuario = idUsuarios
         self.idEndereco = idEndenreco
         self.nome = nome
         self.categoria = categoria
-    
-###############################################################
-
-    def getIdProduto(self):
-        return self.idProduto
-    
-    def setIdProduto(self, novoIdProduto):
-        self.idProduto = novoIdProduto
-        return novoIdProduto
 
 ###############################################################
 
