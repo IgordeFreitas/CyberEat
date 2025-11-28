@@ -55,7 +55,7 @@ def deletarUsuario(idUsuarios):
             return "Usuario excluido com sucesso"
 
     except mysql.connector.Error as error:
-        print('Erro')
+        print(error)
         connect.rollback()
 
     finally:

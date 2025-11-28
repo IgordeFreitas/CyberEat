@@ -44,17 +44,17 @@ def inserirPedidos(id_Restaurantes, id_Usuarios, id_Endereco, id_Pagamento, id_E
 
 ############################################################################
 
-def deletarPedidos(id_Pedidos):
+def deletarPedidos(id_Produtos):
     connect = None 
     connect = getConnection()
     try:
         connect.start_transaction()
-        linhasAfetadas = deletePedidos(connect, id_Pedidos)
+        linhasAfetadas = deletePedidos(connect, id_Produtos)
         connect.commit()
         if linhasAfetadas == 1:
-            return "Pedido excluido com sucesso"
+            return "Produto excluido com sucesso"
     except mysql.connector.Error as error:
-        print('Erro')
+        print(f'ERRO - {error}')
         connect.rollback()
 
     finally:

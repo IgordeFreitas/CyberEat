@@ -15,7 +15,7 @@ def consultarAvaliacoes():
         query = queryAvaliacoes(connection)
         avaliacoes = []        
         for row in query:
-            user = Avaliacoes(row['id_Avaliacoes'],row['notaServico'], row['comentarioServico'])
+            user = Avaliacoes(row['id_pedidos'] ,row['nota'], row['comentario'])
             avaliacoes.append(user)
         return avaliacoes
     finally:

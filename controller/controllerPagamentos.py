@@ -15,7 +15,7 @@ def consultarPagamentos():
         query = queryPagamentos(connection)
         pagamento = []        
         for row in query:
-            user = Pagamentos(row['tipoPagamento'], row['statusPagamento'], row['valorTotal'])
+            user = Pagamentos(row['tipo_pagamento'], row['status_pagamento'], row['valor_total'])
             pagamento.append(user)
         return pagamento
     finally:

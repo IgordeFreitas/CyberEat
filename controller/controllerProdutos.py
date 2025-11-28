@@ -1,39 +1,39 @@
 import mysql.connector
 from config.dbConfig import getConnection
-from model.Entregas.getEntregas import queryEntregas
-from model.Entregas.postEntregas import insertEntregas
-from model.Entregas.deleteEntregas import deleteEntregas
-from lib.Entregas import Entregas
+from model.Produtos.getProdutos import queryProdutos
+from model.Produtos.postProdutos import insertProdutos
+from model.Produtos.deleteProdutos import deleteProdutos
+from lib.Produtos import Produtos
 
 ############################################################################
 
 
-def consultarEntregas():
+def consultarProdutos():
     connection = None
     try:
         connection = getConnection()
-        query = queryEntregas(connection)
-        entrega = []        
+        query = queryProdutos(connection)
+        produtos = []        
         for row in query:
-            user = Entregas(row['id_endereco'], row['data_entrega'])
-            entrega.append(user)
-        return entrega
+            user = Produtos(row['id_restaurantes'], row['descricao'])
+            produtos.append(user)
+        return produtos
     finally:
         if connection:
             connection.close()
 
 ############################################################################
 
-def inserirEntregas(id_Indereco, dataEntrega):
+def inserirProdutos(id_restaurantes, descricao):
     connect = None 
     connect = getConnection()
     try:
-        entrega = Entregas(id_Indereco, dataEntrega)
+        user = Produtos(id_restaurantes, descricao)
         connect.start_transaction()
-        linhasAfetadas = insertEntregas(connect, entrega)
+        linhasAfetadas = insertProdutos(connect, user)
         connect.commit()
         if linhasAfetadas == 1:
-            return "Entrega cadastrado com sucesso"
+            return "Usuario cadastrado com sucesso"
     except mysql.connector.Error as error:
         print('Erro')
         connect.rollback()
@@ -44,17 +44,18 @@ def inserirEntregas(id_Indereco, dataEntrega):
 
 ############################################################################
 
-def deletarEntregas(id_Entregas):
+def deletarProdutos(id_Produtos):
     connect = None 
     connect = getConnection()
     try:
         connect.start_transaction()
-        linhasAfetadas = deleteEntregas(connect, id_Entregas)
+        linhasAfetadas = deleteProdutos(connect, id_Produtos)
         connect.commit()
         if linhasAfetadas == 1:
-            return "Entrega excluido com sucesso"
+            return "Produto excluido com sucesso"
+
     except mysql.connector.Error as error:
-        print('Erro')
+        print(error)
         connect.rollback()
 
     finally:

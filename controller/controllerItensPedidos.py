@@ -15,7 +15,7 @@ def consultarItensPedido():
         query = queryItensPedido(connection)
         itensPedido = []        
         for row in query:
-            user = ItensPedido(row['id_Pedido'], row['nomeItem'], row['quantidadeItem'], row['precoUnitario'])
+            user = ItensPedido(row['id_pedidos'], row['nome_item'], row['quantidade_item'], row['preco_unitario'])
             itensPedido.append(user)
         return itensPedido
     finally:
