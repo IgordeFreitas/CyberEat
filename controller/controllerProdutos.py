@@ -15,8 +15,8 @@ def consultarProdutos():
         query = queryProdutos(connection)
         produtos = []        
         for row in query:
-            user = Produtos(row['id_restaurantes'], row['descricao'])
-            produtos.append(user)
+            product = Produtos(row['id_restaurante'], row['descricao'])
+            produtos.append(product)
         return produtos
     finally:
         if connection:
@@ -28,14 +28,14 @@ def inserirProdutos(id_restaurantes, descricao):
     connect = None 
     connect = getConnection()
     try:
-        user = Produtos(id_restaurantes, descricao)
+        produto = Produtos(id_restaurantes, descricao)
         connect.start_transaction()
-        linhasAfetadas = insertProdutos(connect, user)
+        linhasAfetadas = insertProdutos(connect, produto)
         connect.commit()
         if linhasAfetadas == 1:
-            return "Usuario cadastrado com sucesso"
+            return "Produto cadastrado com sucesso"
     except mysql.connector.Error as error:
-        print('Erro')
+        print(f'Erro {error}')
         connect.rollback()
 
     finally:

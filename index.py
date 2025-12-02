@@ -85,7 +85,7 @@ def consultEntregas():
 
 def cadastrarEntrega(
     id_endereco: int = Body(embed = True),
-    data_entrega: int = Body(embed = True)
+    data_entrega: str = Body(embed = True)
 ):
    
     return controllerEntregas.inserirEntregas(id_endereco, data_entrega)
@@ -107,7 +107,7 @@ def consultProdutos():
 
 def cadastrarProdutos(
     id_restaurantes: int = Body(embed = True),
-    descricao: int = Body(embed = True)
+    descricao: str = Body(embed = True)
 ):
    
     return controllerProdutos.inserirProdutos(id_restaurantes, descricao)
@@ -129,10 +129,9 @@ def consultPagamentos():
 @app.post("/pagamentos")
 
 def cadastrarPagamentos(
-    tipo_pagamento: int = Body(embed = True),
-    status_pagamento: int = Body(embed = True),
-    valor_total: int = Body(embed = True),
-    
+    tipo_pagamento: str = Body(embed = True),
+    status_pagamento: str = Body(embed = True),
+    valor_total: float = Body(embed = True),
 ):
     return controllerPagamentos.inserirPagamentos(tipo_pagamento, status_pagamento, valor_total)
 
@@ -142,7 +141,7 @@ def deletarPagamentos(id_pagamento: int = Body(embed = True)):
     controllerPagamentos.deletarPagamentos(id_pagamento)
 
 
-#############################################
+##################################################################
 
 
 @app.get("/itens_pedido")
@@ -153,13 +152,13 @@ def consultItensPedido():
 @app.post("/itens_pedido")
 
 def cadastrarItens_pedido(
-    id_pedidos: str = Body(embed = True),
+    id_pedidos: int = Body(embed = True),
     nome_item: str = Body(embed = True),
-    quantidade: str = Body(embed = True),
-    preco_unitario: str = Body(embed = True)
+    quantidade: int = Body(embed = True),
+    preco_unitario: float = Body(embed = True)
 ):
 
-    return controllerItensPedidos.inserirItens_pedido(id_pedidos, nome_item, quantidade, preco_unitario)
+    return controllerItensPedidos.inserirItensPedido(id_pedidos, nome_item, quantidade, preco_unitario)
 
 @app.delete("/itens_pedido")
 
@@ -178,15 +177,19 @@ def consultavaliacoes():
 @app.post("/avaliacoes")
 
 def cadastrarAvaliacoes(
+    idPedido: int = Body(embed = True),
     notaServico: int = Body(embed = True),
-    comentarioServico: int = Body(embed = True),
+    comentarioServico: str = Body(embed = True),
     
 ):
-    return controllerAvaliacoes.inserirAvaliacoess(notaServico, comentarioServico)
+    return controllerAvaliacoes.inserirAvaliacoes(idPedido, notaServico, comentarioServico)
 
 @app.delete("/avaliacoes")
 
 def deletarAvaliacoes(id_avaliacao: int = Body(embed = True)):
     return controllerAvaliacoes.deletarAvaliacoes(id_avaliacao)
     
+
+##########################################################
+
 

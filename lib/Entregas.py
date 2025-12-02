@@ -1,15 +1,15 @@
 class Entregas:
-    def __init__(self, idIndereco, dataEntrega):
-        self.idIndereco = idIndereco
+    def __init__(self, idEndereco, dataEntrega):
+        self.idEndereco = idEndereco
         self.dataEntrega = dataEntrega
 
 ###############################################################
    
-    def getIdIndereco(self):
-        return self.idIndereco
+    def getIdEndereco(self):
+        return self.idEndereco
 
-    def setIdIndereco(self, novoIdIndereco):
-        self.idIndereco = novoIdIndereco
+    def setIdEndereco(self, novoIdEndereco):
+        self.idEndereco = novoIdEndereco
 
 ###############################################################
 

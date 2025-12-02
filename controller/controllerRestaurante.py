@@ -35,7 +35,7 @@ def inserirRestaurantes(id_Usuarios, id_Endenreco, nome_restaurante, categoria):
         if linhasAfetadas == 1:
             return "Restaurante cadastrado com sucesso"
     except mysql.connector.Error as error:
-        print('Erro')
+        print(f'Erro {error}')
         connect.rollback()
 
     finally:

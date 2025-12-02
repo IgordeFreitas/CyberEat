@@ -54,7 +54,7 @@ def deletarEntregas(id_Entregas):
         if linhasAfetadas == 1:
             return "Entrega excluido com sucesso"
     except mysql.connector.Error as error:
-        print('Erro')
+        print(f'Erro {error}')
         connect.rollback()
 
     finally:

@@ -23,12 +23,12 @@ def consultarAvaliacoes():
             connection.close()
 
 
-def inserirAvaliacoes(id_Avaliacoes, notaServico, comentarioServico):
+def inserirAvaliacoes(idPedido, notaServico, comentarioServico):
     connect = None 
     connect = getConnection()
     try:
         connect.start_transaction()
-        linhasAfetadas = insertAvaliacoes(connect, id_Avaliacoes, notaServico, comentarioServico)
+        linhasAfetadas = insertAvaliacoes(connect, idPedido, notaServico, comentarioServico)
         connect.commit()
         if linhasAfetadas == 1:
             return "Avaliacoes cadastrado com sucesso"
@@ -52,7 +52,7 @@ def deletarAvaliacoes(id_Avaliacoes):
         if linhasAfetadas == 1:
             return "Avaliacoes excluido com sucesso"
     except mysql.connector.Error as error:
-        print('Erro')
+        print(f'Erro {error}')
         connect.rollback()
 
     finally:

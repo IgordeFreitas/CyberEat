@@ -1,6 +1,6 @@
 class Produtos:
     def __init__(self, idRestaurante, descricao):
-        self._idRestaurante = idRestaurante
+        self.idRestaurante = idRestaurante
         self.descricao = descricao
 
 ######################################################

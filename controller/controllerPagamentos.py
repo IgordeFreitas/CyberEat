@@ -43,7 +43,7 @@ def inserirPagamentos(tipoPagamento, statusPagamento, valorTotal):
 
 ############################################################################
 
-def deletarPagamento(id_Pagamentos):
+def deletarPagamentos(id_Pagamentos):
     connect = None 
     connect = getConnection()
     try:
@@ -53,7 +53,7 @@ def deletarPagamento(id_Pagamentos):
         if linhasAfetadas == 1:
             return "Pagamento excluido com sucesso"
     except mysql.connector.Error as error:
-        print('Erro')
+        print(f'Erro {error}')
         connect.rollback()
 
     finally:
