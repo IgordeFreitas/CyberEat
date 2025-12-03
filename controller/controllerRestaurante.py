@@ -3,6 +3,7 @@ from config.dbConfig import getConnection
 from model.Restaurantes.getRestaurantes import queryRestaurantes
 from model.Restaurantes.postRestaurantes import insertRestaurantes
 from model.Restaurantes.deleteRestaurantes import deleteRestaurantes
+from model.Restaurantes.updateRestaurante import updateRestaurante
 from lib.Restaurante import Restaurante
 
 ############################################################################
@@ -53,6 +54,25 @@ def deletarRestaurante(id_Restaurantes):
         connect.commit()
         if linhasAfetadas == 1:
             return "Restaurante excluido com sucesso"
+    except mysql.connector.Error as error:
+        print(error)
+        connect.rollback()
+
+    finally:
+        if connect:
+            connect.close()
+
+############################################################################
+
+def alterarRestaurante(idUsuarios, idEndereco, nomeRestaurante, categoria, id_Restaurantes):
+    connect = None 
+    connect = getConnection()
+    try:
+        connect.start_transaction()
+        linhasAfetadas = updateRestaurante(connect, idUsuarios, idEndereco, nomeRestaurante, categoria, id_Restaurantes)
+        connect.commit()
+        if linhasAfetadas == 1:
+            return "Restaurante ataulizado com sucesso"
     except mysql.connector.Error as error:
         print(error)
         connect.rollback()

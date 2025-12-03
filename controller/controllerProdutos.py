@@ -3,6 +3,7 @@ from config.dbConfig import getConnection
 from model.Produtos.getProdutos import queryProdutos
 from model.Produtos.postProdutos import insertProdutos
 from model.Produtos.deleteProdutos import deleteProdutos
+from model.Produtos.updateProdutos import updateProdutos
 from lib.Produtos import Produtos
 
 ############################################################################
@@ -53,6 +54,26 @@ def deletarProdutos(id_Produtos):
         connect.commit()
         if linhasAfetadas == 1:
             return "Produto excluido com sucesso"
+
+    except mysql.connector.Error as error:
+        print(error)
+        connect.rollback()
+
+    finally:
+        if connect:
+            connect.close()
+
+############################################################################
+
+def alterarProdutos(id_restaurantes, descricao, idProduto):
+    connect = None 
+    connect = getConnection()
+    try:
+        connect.start_transaction()
+        linhasAfetadas = updateProdutos(connect, id_restaurantes, descricao, idProduto)
+        connect.commit()
+        if linhasAfetadas == 1:
+            return "Produto atualizado com sucesso"
 
     except mysql.connector.Error as error:
         print(error)

@@ -3,6 +3,7 @@ from config.dbConfig import getConnection
 from model.Usuarios.getUsuarios import queryUsuarios
 from model.Usuarios.postUsuarios import insertUsuarios
 from model.Usuarios.deleteUsuario import deleteUsuarios
+from model.Usuarios.updateUsuario import updateUsuario
 from lib.Usuarios import Usuarios
 
 ############################################################################
@@ -61,3 +62,23 @@ def deletarUsuario(idUsuarios):
     finally:
         if connect:
             connect.close()
+
+############################################################################
+
+def atualizarUsuario(nome, email, senha, telefone, idUsuario):
+    conexao = None 
+    conexao = getConnection()
+    try:
+        conexao.start_transaction()
+        linhasAfetadas = updateUsuario(conexao, nome, email, senha, telefone, idUsuario)
+        conexao.commit()
+        if linhasAfetadas == 1:
+            return "Usuario atualizado com sucesso"
+
+    except mysql.connector.Error as error:
+        print(error)
+        conexao.rollback()
+
+    finally:
+        if conexao:
+            conexao.close()

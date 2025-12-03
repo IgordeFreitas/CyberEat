@@ -25,6 +25,16 @@ def cadastrarUsuario(
 def apagarUsuarios(idUsuario: int = Body(embed = True)):
     return controllerUsuarios.deletarUsuario(idUsuario)
 
+@app.patch("/usuarios")
+
+def alterarUsuario(
+    nome: str = Body(embed = True),
+    email: str = Body(embed = True),
+    senha: str = Body(embed = True),
+    telefone: str = Body(embed = True),
+    idUsuario: int = Body(embed = True)
+):
+    return controllerUsuarios.atualizarUsuario(nome, email, senha, telefone, idUsuario)
 
 #################################################################  Abaixo, tudo sobre a rota /restaurantes
 
@@ -47,6 +57,17 @@ def cadastrarRestaurante(
 
 def deletarRestaurantes(id_restaurantes: int = Body(embed = True)):
     return controllerRestaurante.deletarRestaurante(id_restaurantes)
+
+@app.patch("/restaurantes")
+
+def alterarRestaurante(
+       idUsuario: int = Body(embed = True),
+       idEndereco: int = Body(embed = True),
+       nomeRestaurante: str = Body(embed = True),
+       categoria: str = Body(embed = True),
+       idRestaurante: int = Body(embed = True)
+):
+    return controllerRestaurante.alterarRestaurante(idUsuario, idEndereco, nomeRestaurante, categoria, idRestaurante)
     
 #################################################################  Abaixo, tudo sobre a rota /pedidos
 
@@ -116,6 +137,16 @@ def cadastrarProdutos(
 
 def apagarProdutos(id_produto: int = Body(embed = True)):
     return controllerProdutos.deletarProdutos(id_produto)
+
+
+@app.patch("/produtos")
+
+def alterarProdutos(
+    idRestaurante: int = Body(embed = True),
+    descricao: str = Body(embed = True),
+    idProduto: int = Body(embed = True)
+):
+    return controllerProdutos.alterarProdutos(idRestaurante, descricao, idProduto)
 
 
 ########################################################
