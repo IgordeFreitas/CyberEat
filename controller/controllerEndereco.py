@@ -3,6 +3,7 @@ from config.dbConfig import getConnection
 from model.Enderecos.getEndereco import queryEndereco
 from model.Enderecos.postEnderecos import insertEnderecos
 from model.Enderecos.deleteEnderecos import deleteEnderecos
+from model.Enderecos.updateEndereco import updateEndereco
 from lib.Endereco import Endereco
 
 
@@ -54,6 +55,24 @@ def deletarEndereco(id_Enderecos):
     except mysql.connector.Error as error:
         print('Erro')
         connect.rollback()
+
+    finally:
+        if connect:
+            connect.close()
+
+
+def alterarEndereco(id_usuarios, bairro, id_endereco):
+    connect = None 
+    connect = getConnection()
+    try:
+        connect.start_transaction()
+        linhasAfetadas = updateEndereco(connect, id_usuarios, bairro, id_endereco)
+        connect.commit()
+        if linhasAfetadas == 1:
+            return "Endereco alterado com sucesso"
+    except mysql.connector.Error as error:
+        connect.rollback()
+        return f'ERRO - {error}'
 
     finally:
         if connect:

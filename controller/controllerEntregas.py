@@ -3,6 +3,7 @@ from config.dbConfig import getConnection
 from model.Entregas.getEntregas import queryEntregas
 from model.Entregas.postEntregas import insertEntregas
 from model.Entregas.deleteEntregas import deleteEntregas
+from model.Entregas.updateEntregas import updateEntregas
 from lib.Entregas import Entregas
 
 ############################################################################
@@ -56,6 +57,25 @@ def deletarEntregas(id_Entregas):
     except mysql.connector.Error as error:
         print(f'Erro {error}')
         connect.rollback()
+
+    finally:
+        if connect:
+            connect.close()
+
+
+
+def alterarEntregas(id_endereco, data_entrega, id_entrega):
+    connect = None 
+    connect = getConnection()
+    try:
+        connect.start_transaction()
+        linhasAfetadas = updateEntregas(connect, id_endereco, data_entrega, id_entrega)
+        connect.commit()
+        if linhasAfetadas == 1:
+            return "Entrega alterado com sucesso"
+    except mysql.connector.Error as error:
+        connect.rollback()
+        return f'ERRO - {error}'
 
     finally:
         if connect:

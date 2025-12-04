@@ -3,6 +3,7 @@ from config.dbConfig import getConnection
 from model.Pagamentos.getPagamentos import queryPagamentos
 from model.Pagamentos.postPagamentos import insertPagamentos
 from model.Pagamentos.deletePagamentos import deletePagamentos
+from model.Pagamentos.updatePagamentos import updatePagamentos
 from lib.Pagamentos import Pagamentos
 
 ############################################################################
@@ -55,6 +56,24 @@ def deletarPagamentos(id_Pagamentos):
     except mysql.connector.Error as error:
         print(f'Erro {error}')
         connect.rollback()
+
+    finally:
+        if connect:
+            connect.close()
+
+
+def alterarPagamentos(tipo_pagamento, status_pagamento, valor_total, idpagamento):
+    connect = None 
+    connect = getConnection()
+    try:
+        connect.start_transaction()
+        linhasAfetadas = updatePagamentos(connect, tipo_pagamento, status_pagamento, valor_total, idpagamento)
+        connect.commit()
+        if linhasAfetadas == 1:
+            return "Pagamento alterado com sucesso"
+    except mysql.connector.Error as error:
+        connect.rollback()
+        return f'ERRO - {error}'
 
     finally:
         if connect:

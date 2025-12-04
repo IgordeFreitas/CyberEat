@@ -3,6 +3,7 @@ from config.dbConfig import getConnection
 from model.Avaliacoes.getAvaliacoes import queryAvaliacoes
 from model.Avaliacoes.postAvaliacoes import insertAvaliacoes
 from model.Avaliacoes.deleteAvaliacoes import deleteAvaliacoes
+from model.Avaliacoes.updateAvaliacoes import updateAvaliacoes
 from lib.Avaliacoes import Avaliacoes
 
 
@@ -54,6 +55,23 @@ def deletarAvaliacoes(id_Avaliacoes):
     except mysql.connector.Error as error:
         print(f'Erro {error}')
         connect.rollback()
+
+    finally:
+        if connect:
+            connect.close()
+
+def alterarAvaliacoes( id_pedidos, nota, comentario, id_avaliacao):
+    connect = None 
+    connect = getConnection()
+    try:
+        connect.start_transaction()
+        linhasAfetadas = updateAvaliacoes(connect, id_pedidos, nota, comentario, id_avaliacao )
+        connect.commit()
+        if linhasAfetadas == 1:
+            return "Avaliaçao alterado com sucesso"
+    except mysql.connector.Error as error:
+        connect.rollback()
+        return f'ERRO - {error}'
 
     finally:
         if connect:

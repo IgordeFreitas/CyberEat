@@ -130,6 +130,15 @@ def apagarUsuarios(id_entrega: int = Body(embed = True)):
     return controllerEntregas.deletarEntregas(id_entrega)
 
 
+@app.patch("/entregas")
+def alterarEntregas(
+    id_endereco: int = Body(embed = True),
+    data_entrega: str = Body(embed = True),
+    id_entrega: int = Body(embed = True),
+
+):
+    return controllerEntregas.alterarEntregas(id_endereco, data_entrega, id_entrega)
+
 #################################################################  Abaixo, tudo sobre a rota /produtos
 
 @app.get("/produtos")
@@ -187,8 +196,8 @@ def deletarPagamentos(id_pagamento: int = Body(embed = True)):
 
 @app.patch("/pagamentos")
 
-def alterarPagamentos(tipo_pagamento: str = Body(embed = True) , status_pagamento: str = Body(embed = True), valor_total: str = Body(embed = True), idpagamentos: int = Body(embed = True)):
-    return     controllerPagamentos.alterarPagamentos(tipo_pagamento, status_pagamento,  valor_total, idpagamentos)
+def alterarPagamentos(tipo_pagamento: str = Body(embed = True) , status_pagamento: str = Body(embed = True), valor_total: str = Body(embed = True), idpagamento: int = Body(embed = True)):
+    return     controllerPagamentos.alterarPagamentos(tipo_pagamento, status_pagamento,  valor_total, idpagamento)
 
 
 ##################################################################
@@ -212,9 +221,20 @@ def cadastrarItens_pedido(
 
 @app.delete("/itens_pedido")
 
-def apagarUsuarios(id_Item_Pedido: int = Body(embed = True)):
+def apagarItensPedido(id_Item_Pedido: int = Body(embed = True)):
     return controllerItensPedidos.deletarItensPedido(id_Item_Pedido)
 
+
+@app.patch("/itens_pedido")
+
+def alterarItens_pedido(
+    id_pedidos: int = Body(embed = True),
+    nome_item: str = Body(embed = True),
+    quantidade: int = Body(embed = True),
+    preco_unitario: float = Body(embed = True),
+    id_item_pedido: int = Body(embed = True)
+):
+    return controllerItensPedidos.alterarItensPedido(id_pedidos, nome_item, quantidade, preco_unitario, id_item_pedido)
 
 ##########################################################
 
@@ -238,8 +258,44 @@ def cadastrarAvaliacoes(
 
 def deletarAvaliacoes(id_avaliacao: int = Body(embed = True)):
     return controllerAvaliacoes.deletarAvaliacoes(id_avaliacao)
+
+@app.patch("/avaliacoes")
+
+def alterarAvaliacoes(
+    id_pedidos: int = Body(embed = True),
+    nota: str = Body(embed = True),
+    comentario: float = Body(embed = True),
+    id_avaliacao: int = Body(embed = True)
+):
+    return controllerAvaliacoes.alterarAvaliacoes(id_pedidos, nota, comentario, id_avaliacao)
     
 
 ##########################################################
 
 
+@app.get("/endereco")
+
+def consultEndereco():
+    return controllerEndereco.consultarEndereco()
+
+@app.post("/endereco")
+
+def cadastrarEndereco(
+    id_usuarios: int = Body(embed = True),
+    bairro: int = Body(embed = True),    
+):
+    return controllerEndereco.inserirEndereco(id_usuarios, bairro)
+
+@app.delete("/endereco")
+
+def deletarEndereco(id_endereco: int = Body(embed = True)):
+    return controllerEndereco.deletarEndereco(id_endereco)
+
+@app.patch("/endereco")
+
+def alterarEndereco(
+    id_usuarios: int = Body(embed = True),
+    bairro: str = Body(embed = True),
+    id_endereco: int = Body(embed = True)
+):
+    return controllerEndereco.alterarEndereco(id_usuarios, bairro, id_endereco)
