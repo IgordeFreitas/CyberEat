@@ -187,8 +187,8 @@ def deletarPagamentos(id_pagamento: int = Body(embed = True)):
 
 @app.patch("/pagamentos")
 
-def alterarPagamentos(tipo_pagamento: str = Body(embed = True) , status_pagamento: str = Body(embed = True), valor_total: str = Body(embed = True), idpagamentos: int = Body(embed = True)):
-    return     controllerPagamentos.alterarPagamentos(tipo_pagamento, status_pagamento,  valor_total, idpagamentos)
+def alterarPagamentos(tipo_pagamento: str = Body(embed = True) , status_pagamento: str = Body(embed = True), valor_total: int = Body(embed = True), idpagamentos: int = Body(embed = True)):
+    return controllerPagamentos.alterarPagamentos(tipo_pagamento, status_pagamento, valor_total, idpagamentos)
 
 
 ##################################################################
