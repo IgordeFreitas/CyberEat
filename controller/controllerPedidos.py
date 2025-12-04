@@ -3,6 +3,7 @@ from config.dbConfig import getConnection
 from model.Pedidos.getPedidos import queryPedidos
 from model.Pedidos.postPedidos import insertPedidos
 from model.Pedidos.deletePedidos import deletePedidos
+from model.Pedidos.updatePedidos import updatePedidos
 from lib.Pedidos import Pedidos
 
 ############################################################################
@@ -56,6 +57,26 @@ def deletarPedidos(id_Produtos):
     except mysql.connector.Error as error:
         print(f'ERRO - {error}')
         connect.rollback()
+
+    finally:
+        if connect:
+            connect.close()
+
+############################################################################
+
+
+def alterarPedidos(id_restaurante, id_usuarios, id_endereco, id_pagamento, id_entrega, idPedido):
+    connect = None 
+    connect = getConnection()
+    try:
+        connect.start_transaction()
+        linhasAfetadas = updatePedidos(connect, id_restaurante, id_usuarios, id_endereco, id_pagamento, id_entrega, idPedido)
+        connect.commit()
+        if linhasAfetadas == 1:
+            return "Pedido alterado com sucesso"
+    except mysql.connector.Error as error:
+        connect.rollback()
+        return f'ERRO - {error}'
 
     finally:
         if connect:

@@ -95,6 +95,19 @@ def deletarPedidos(id_pedido: int = Body(embed = True)):
     controllerPedidos.deletarPedidos(id_pedido)
 
 
+@app.patch('/pedidos')
+
+def alterarPedido(
+    id_restaurante: int = Body(embed = True), 
+    id_usuarios: int = Body(embed = True), 
+    id_endereco: int = Body(embed = True), 
+    id_pagamento: int = Body(embed = True), 
+    id_entrega: int = Body(embed = True), 
+    idPedido: int = Body(embed = True)
+):
+    return controllerPedidos.alterarPedidos(id_restaurante, id_usuarios, id_endereco, id_pagamento, id_entrega, idPedido)
+
+
 #################################################################  Abaixo, tudo sobre a rota /entregas
 
 @app.get("/entregas")
