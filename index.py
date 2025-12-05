@@ -263,8 +263,8 @@ def deletarAvaliacoes(id_avaliacao: int = Body(embed = True)):
 
 def alterarAvaliacoes(
     id_pedidos: int = Body(embed = True),
-    nota: str = Body(embed = True),
-    comentario: float = Body(embed = True),
+    nota: int = Body(embed = True),
+    comentario: str = Body(embed = True),
     id_avaliacao: int = Body(embed = True)
 ):
     return controllerAvaliacoes.alterarAvaliacoes(id_pedidos, nota, comentario, id_avaliacao)
