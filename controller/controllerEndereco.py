@@ -16,7 +16,7 @@ def consultarEndereco():
         query = queryEndereco(connection)
         endereco = []        
         for row in query:
-            user = Endereco(row['id_usuario'], row['bairro'])
+            user = Endereco(row['id_endereco'], row['bairro'])
             endereco.append(user)
         return endereco
     finally:
