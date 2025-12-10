@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routes import (Avaliacoes, Usuarios, Endereco, Entregas, Pagamentos, Produtos, Pedidos, itensPedidos)
+from routes import (Avaliacoes, Usuarios, Endereco, Entregas, Pagamentos, Produtos, Pedidos, itensPedidos, login)
 
 app = FastAPI()
 
@@ -11,3 +11,4 @@ app.include_router(Pagamentos.router)
 app.include_router(Produtos.router)
 app.include_router(Pedidos.router)
 app.include_router(itensPedidos.router)
+app.include_router(login.router)
