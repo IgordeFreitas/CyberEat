@@ -9,9 +9,9 @@ CREATE TABLE usuarios (
 INSERT INTO usuarios (nome, email, senha, telefone) VALUES ('pedro', 'pedro@gmail', 'senhasecreta','2295944694');
 
 CREATE TABLE endereco (
-    id_endereco INT AUTO_INCREMENT PRIMARY KEY,
-    id_usuarios INT NOT NULL,
-    bairro VARCHAR(255) NOT NULL,
+    id_endereco INT AUTO_INCREMENT PRIMARY KEY ON DELETE CASCADE ON UPDATE CASCADE,
+    id_usuarios INT NOT NULL ON DELETE CASCADE ON UPDATE CASCADE,
+    bairro VARCHAR(255) NOT NULL ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (id_usuarios) REFERENCES usuarios(id_usuarios) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -27,7 +27,7 @@ CREATE TABLE pagamentos (
 INSERT INTO pagamentos (tipo_pagamento, status_pagamento, valor_total) VALUES ('dinheiro','pago', 8);
 
 CREATE TABLE restaurantes (
-    id_restaurantes INT AUTO_INCREMENT PRIMARY KEY,
+    id_restaurantes INT AUTO_INCREMENT PRIMARY KEY ON DELETE CASCADE ON UPDATE CASCADE,
     id_produto INT,
     id_usuarios INT,
     id_endereco INT,
@@ -59,7 +59,7 @@ CREATE TABLE entregas (
 INSERT INTO entregas (id_entrega, data_entrega) VALUES (1, '2025-04-11');
 
 CREATE TABLE pedidos (
-    id_pedidos INT AUTO_INCREMENT PRIMARY KEY,
+    id_pedidos INT AUTO_INCREMENT PRIMARY KEY ON DELETE CASCADE ON UPDATE CASCADE,
     id_restaurantes INT,
     id_usuarios INT NOT NULL,
     id_endereco INT NOT NULL,
