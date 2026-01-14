@@ -61,6 +61,7 @@ def deletarPagamentos(id_Pagamentos):
         if connect:
             connect.close()
 
+############################################################################
 
 def alterarPagamentos(tipo_pagamento, status_pagamento, valor_total, idpagamento):
     connect = None 
