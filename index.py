@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from routes import FastAPI
 from routes import (Avaliacoes, Usuarios, Endereco, Entregas, Pagamentos, Produtos, Pedidos, itensPedidos, login)
 
 app = FastAPI()
